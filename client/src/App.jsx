@@ -9,13 +9,13 @@ function App() {
   async function fetchProducts() {
     try {
       const response = await axios.get("http://localhost:4001/products");
-      console.log("Response data:", response.data);
-      if (Array.isArray(response.data)) {
-        setProducts(response.data);
-      } else if (response.data && typeof response.data === 'object') {
-        setProducts([response.data]);
+      console.log("Response data:", response.data.data);
+      if (Array.isArray(response.data.data)) {
+        setProducts(response.data.data);
+      } else if (response.data.data && typeof response.data.data === 'object') {
+        setProducts([response.data.data]);
       } else {
-        console.error("Unexpected response format:", response.data);
+        console.error("Unexpected response format:", response.data.data);
       }
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -25,7 +25,7 @@ function App() {
 
   async function deleteProduct(id) {
     try {
-      await axios.delete(`http://localhost:4001/products/:id`);
+      await axios.delete(`http://localhost:4001/products/${id}`);
       fetchProducts(); // Refresh the product list after deletion
     } catch (error) {
       console.error(`Error deleting product with id ${id}:`, error);
