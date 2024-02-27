@@ -22,7 +22,6 @@ function App() {
       setError(error.toString());
     }
   }
-
   async function deleteProduct(id) {
     try {
       await axios.delete(`http://localhost:4001/products/${id}`);
